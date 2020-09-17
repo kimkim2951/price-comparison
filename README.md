@@ -1,24 +1,38 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
+|Column|Type|Options|
+|------|----|-------|
+|nick_name|string|null: false, unique: true|
+|email|string|null: false, unique: true|
+|password|string|null: false|
+### Association
+- has_many :stores
 
-Things you may want to cover:
+## storesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|references|null: false, foreign_key: true|
+|name|string|null: false|
+|store_type|integer|null: false|
+|address|string|null: false|
+|prefecture|integer|null: false|
+|city|string|null: false|
+|village|string||
+|business_hours|string|null: false|
+|rest_day|integer|null: false|
+### Association
+- has_many :items
+- belongs_to :user
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## itemsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|store_id|references|null: false, foreign_key: true|
+|name|string|null: false|
+|item_type|integer|null: false|
+|price|integer|null: false|
+|post_data|date|null: false|
+|leaflet_image|string||
+### Association
+- belongs_to :store
